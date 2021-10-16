@@ -21,7 +21,7 @@ linkedList_h* createLinkedList_h(void){
 	return L;
 }
 
-void insertFirstNode(linkedList_h *L, char *x){
+void insertFirstNode(linkedList_h *L, const char* x){
 	ListNode* newNode;
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode -> data, x);
@@ -29,7 +29,7 @@ void insertFirstNode(linkedList_h *L, char *x){
 	L -> head = newNode; // newNode 는 ListNode의 포인터 변수 이기 때문에 L->head 는 newNode를 가리키게 된다.  
 }
 
-void insertMiddleNode(linkedList_h *L,listNode *pre, char *x) {
+void insertMiddleNode(linkedList_h* L,listNode* pre, const char* x) {
 	listNode* newNode;
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode -> data, x);
@@ -48,21 +48,51 @@ void insertMiddleNode(linkedList_h *L,listNode *pre, char *x) {
 	
 }
 
-void insertLastNode(linkedList_h* L, char* L){
+void insertLastNode(linkedList_h* L, const char* x){
 	listNode* newNode;
-	newNode = (listNode*)malloc(sizeof(listNode))
+	listNode* temp;
+	newNode = (listNode*)malloc(sizeof(listNode));
+	strcpy(newNode -> data, x);
+	
+	newNode -> link = NULL;
+	
+	if( L -> head == NULL){
+		L -> head = newNode;
+		return;
+	}
+	temp = L -> head;
+	while(temp -> link != NULL) temp = temp -> link; // temp는 단지 마지막 노드를 찾기 위한 것 
+	temp -> link = newNode; 
 	
 }
 
+void freeLinkedList_h(linkedList_h* L) { // 다음에 한번더 이해 
+	listNode* p;
+	while(L->head != NULL){
+		p = L -> head;
+		L -> head = L -> head -> link;
+		free(p);
+		p = NULL;
+	}
+}
 
-
-
-
-
-
+void printList(linkedList_h* L){
+	listNode* p;
+	printf("L =(");
+	p = L -> head;
+	while (p != NULL){
+		printf("%s", p -> data);
+		p = p -> link;
+		if( p != NULL){
+			printf(", ");
+		}
+	}
+	printf(") \n");
+}
 
 
 // main
+
 int main(){
 	linkedList_h* L; //L은 맨 처음부터 실행되어 있어서 insertMiddleNode의 if문이 돌아감 
 	L = createLinkedList_h();  
@@ -70,7 +100,7 @@ int main(){
 	printList(L); getchar();
 	
 	printf("(2)리스트에 [수] 노드 삽입하기");
-	insertFirstNode(L, "수");
+	insertFirstNode(L,"수");
 	printList(L); getchar();
 	
 	printf("(3)리스트 마지막에 [금] 노드 삽입하기");
@@ -78,19 +108,17 @@ int main(){
 	printList(L); getchar();
 	
 	printf("(4)리스트 첫 번째에 [월] 노드 삽입하기");
-	insertFirstNode(L, "월");
+	insertFirstNode(L,"월");
 	printList(L); getchar();
 	
 	printf("(5)리스트 공간을 해제하여 공백 리스트로 만들기");
 	freeLinkedList_h(L);
 	printList(L);
-	
 	getchar();
-	
 	return 0; 
 }
 	 
 	
-} 
+ 
 
 
