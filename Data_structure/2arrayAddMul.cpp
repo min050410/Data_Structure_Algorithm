@@ -1,5 +1,5 @@
 #include<stdio.h>
-void inputArray( int a[][3], int r);
+void inputArray( int a[][3], int r); // 이렇게 앞에 배열 없이 지정하면 동적으로 데이터 조절 가능  
 void outputArray( int a[][3], int r);
 void addMatrix( int a[][3], int b[][3], int r);
 void subMatrix( int a[][3], int b[][3], int r);
@@ -7,7 +7,7 @@ void scalarMul( int a[][3], int r, int n);
 int main(){
 	int A[2][3], B[2][3];
 	int row = 2, col = 3;
-	int num;
+	int num;  
 	printf("2*3행렬에 각 원소의 값을 입력하세요");
 	inputArray(A, row);
 	inputArray(B, row);

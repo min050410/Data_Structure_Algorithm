@@ -10,11 +10,9 @@ NODE *createNode( ELEMENT data );
 void printAll( NODE *ptr );
 int main(){
     NODE *head;
-		NODE *head2;
-		NODE *head3;
+	NODE *head2;
+	NODE *head3;
 	
-		
-
     head = createNode( 12 );
 		head2 = createNode( 99 );
 		head->next = head2;
@@ -28,10 +26,10 @@ int main(){
     printAll( head );      
 }
 NODE *createNode( ELEMENT data ){
-    NODE *newo = (NODE *)malloc( sizeof(NODE) );
+    NODE *newo = (NODE *)malloc( sizeof(NODE) ); // malloc 을 통해 동적인 데이터 할당 
     newo->data = data;
     newo->next = NULL;
-	  return newo;
+	  return newo; // dev c 에서는 new 가 변수명으로 안되더라  
 }
 void printAll( NODE *ptr ){
     while( ptr ){
